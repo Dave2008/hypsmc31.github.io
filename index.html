@@ -309,9 +309,9 @@
 						<div id="wrapper4">
 							<span id="academicsSec" style="display: inline;">
 								<p>
-									GPA: <span class="dynamic" id="gpa">3.6</span> / 4.0 <button class="button" onclick="handleAction(0)" id="study">Study (3 hours)</button>
+									GPA: <span class="dynamic" id="gpa">3.8</span> / 4.0 <button class="button" onclick="handleAction(0)" id="study">Study (3 hours)</button>
 									<br /><br />
-									SAT: <span class="dynamic" id="sat">1300</span> / 1600 <button class="button" onclick="handleAction(1)" id="prepare">Prepare (3 hours)</button>
+									SAT: <span class="dynamic" id="sat">1500</span> / 1600 <button class="button" onclick="handleAction(1)" id="prepare">Prepare (3 hours)</button>
 									<br /> <br />
 									School missed: <span class="dynamic" id="missed">0</span> hours
 								</p>
@@ -385,7 +385,7 @@
 									<button class="button" onclick="handleAction(5)" id="friend">Spend time with friends (2 hours)</button>
 									<button class="button" onclick="handleAction(7)" id="watchTV">Watch TV (2 hours)</button>
 									<br /><br />
-									Social aptitude: <span class="dynamic" id="social">50</span> / 100
+									Social aptitude: <span class="dynamic" id="social">90</span> / 100
 								</p>
 							</span>
 							<span id="appsSec" style="display: none;">
@@ -436,15 +436,15 @@
         var whichDecision = 0,
     time = 15,
     day = 1,
-    gpa = 3595,
-    sat = 1300,
+    gpa = 3795,
+    sat = 1500,
     hoursMissed = 0,
     toUpdate = [],
     updateValues = [],
     sanity = 100,
     exhaustion = 0,
     essays = 0,
-    social = 50,
+    social = 90,
     suspended = !1,
     recruited = -1;
 function getIds(e) {
@@ -482,7 +482,7 @@ function handleAction(e) {
                           function () {
                               updateValue("sanity", (sanity -= 5)),
                                   updateValue("exhaustion", (exhaustion += 5)),
-                                  gpa <= 3995 && (gpa += 5),
+                                  gpa <= 3995 && (gpa += 50),
                                   updateValue("gpa", Math.round((gpa / 1e3) * 100) / 100),
                                   calcMissed(3),
                                   (time += 3),
@@ -492,7 +492,7 @@ function handleAction(e) {
                           removePopup,
                       ]
                   )
-                : ((sanity -= 5), updateValue("exhaustion", (exhaustion += 5)), updateValue("sanity", sanity), (time += 3), gpa <= 3995 && (gpa += 5), console.log(gpa), updateValue("gpa", Math.round((gpa / 1e3) * 100) / 100), update())
+                : ((sanity -= 5), updateValue("exhaustion", (exhaustion += 5)), updateValue("sanity", sanity), (time += 3), gpa <= 3995 && (gpa += 50), console.log(gpa), updateValue("gpa", Math.round((gpa / 1e3) * 100) / 100), update())
             : 1 === e
             ? 5 < time && time < 15 && "Saturday" != dayOfWeek && "Sunday" != dayOfWeek && 25 != day
                 ? popup(
@@ -625,7 +625,7 @@ function handleEc(e) {
             ? 15 != time || ("Tuesday" != dayOfWeek && "Thursday" != dayOfWeek)
                 ? popup("Student government meets on Tuesdays and Thursdays at 3:00 P.M.", ["OK"], [removePopup])
                 : (timesAttended[0]++,
-                  8 === timesAttended[0] &&
+                  5 === timesAttended[0] &&
                       (popup("Congratulations! You have been named President of Student Government.", ["OK"], [removePopup]), (document.getElementById("leadership").innerHTML += "President of Student Government <br /> <br />")),
                   (time += 2),
                   sanity <= 95 && (sanity += 5),
@@ -638,7 +638,7 @@ function handleEc(e) {
                 ? firstTimeEc("Football", "football")
                 : ecMeeting(["Monday", "Wednesday"], "Football", function () {
                       timesAttended[1]++,
-                          8 === timesAttended[1] &&
+                          5 === timesAttended[1] &&
                               (popup(
                                   "Congratulations! You have been named Team Captain of football.",
                                   ["OK"],
@@ -655,7 +655,7 @@ function handleEc(e) {
                                   ]
                               ),
                               (document.getElementById("leadership").innerHTML += "Football Team Captain <br /> <br />")),
-                          8 != timesAttended[1] && (exhaustion += 20),
+                          5 != timesAttended[1] && (exhaustion += 20),
                           (time += 3),
                           (gpa -= 20),
                           updateValue("gpa", Math.round((gpa / 1e3) * 100) / 100),
@@ -668,7 +668,7 @@ function handleEc(e) {
                 ? firstTimeEc("Academic Games", "acaGames")
                 : ecMeeting(["Wednesday", "Friday"], "Academic Games", function () {
                       timesAttended[2]++,
-                          8 === timesAttended[2] &&
+                          3 === timesAttended[2] &&
                               (popup("Congratulations! You have been named President of Academic Games.", ["OK"], [removePopup]), (document.getElementById("leadership").innerHTML += "President of Academic Games <br /> <br />")),
                           (time += 2),
                           sanity <= 95 && (sanity += 5),
@@ -682,7 +682,7 @@ function handleEc(e) {
                 ? firstTimeEc("Student Newspaper", "newspaper")
                 : ecMeeting(["Monday", "Thursday"], "Student Newspaper", function () {
                       timesAttended[3]++,
-                          8 === timesAttended[3] &&
+                          5 === timesAttended[3] &&
                               (popup("Congratulations! You have been named Editor-in-chief of Student Newspaper.", ["OK"], [removePopup]),
                               (document.getElementById("leadership").innerHTML += "Editor-in-chief of Student Newspaper <br /> <br />")),
                           (time += 2),
@@ -697,7 +697,7 @@ function handleEc(e) {
                   ? firstTimeEc("Math club", "math")
                   : ecMeeting(["Tuesday", "Friday"], "Math club", function () {
                         timesAttended[4]++,
-                            8 === timesAttended[4] &&
+                            5 === timesAttended[4] &&
                                 (popup("Congratulations! You have been named President of Math club.", ["OK"], [removePopup]), (document.getElementById("leadership").innerHTML += "President of Math club <br /> <br />")),
                             (time += 2),
                             sanity <= 95 && (sanity += 5),
